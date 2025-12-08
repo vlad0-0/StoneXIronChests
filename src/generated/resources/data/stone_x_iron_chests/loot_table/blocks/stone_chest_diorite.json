@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "stone_x_iron_chests:stone_chest_diorite"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "stone_x_iron_chests:blocks/stone_chest_diorite"
+}

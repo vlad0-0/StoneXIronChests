@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "ironchest:copper_chest"
+    },
+    "M": {
+      "tag": "c:ingots/iron"
+    },
+    "P": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "pattern": [
+    "MPM",
+    "PCP",
+    "MPM"
+  ],
+  "result": {
+    "count": 1,
+    "id": "ironchest:iron_chest"
+  }
+}

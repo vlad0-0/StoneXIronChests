@@ -1,0 +1,21 @@
+{
+  "block.stone_x_iron_chests.stone_chest_andesite": "Cofre de Piedra: Andesita",
+  "block.stone_x_iron_chests.stone_chest_calcite": "Cofre de Piedra: Calcita",
+  "block.stone_x_iron_chests.stone_chest_cobbled_deepslate": "Cofre de Piedra: Pavimento de Pizarra Profunda",
+  "block.stone_x_iron_chests.stone_chest_cobblestone": "Cofre de Piedra: Adoquín",
+  "block.stone_x_iron_chests.stone_chest_dark_prismarine": "Cofre de Piedra: Prismarina Oscura",
+  "block.stone_x_iron_chests.stone_chest_deepslate": "Cofre de Piedra: Deepslate",
+  "block.stone_x_iron_chests.stone_chest_deepslate_bricks": "Cofre de Piedra: Ladrillos Deepslate",
+  "block.stone_x_iron_chests.stone_chest_diorite": "Cofre de Piedra: Diorita",
+  "block.stone_x_iron_chests.stone_chest_dripstone": "Cofre de Piedra: Estalactita",
+  "block.stone_x_iron_chests.stone_chest_granite": "Cofre de Piedra: Granito",
+  "block.stone_x_iron_chests.stone_chest_mossy_cobblestone": "Cofre de Piedra: Pavimento de Piedra Cubierto de Musgo",
+  "block.stone_x_iron_chests.stone_chest_mossy_stone_bricks": "Cofre de Piedra: Ladrillos de Piedra Musgosa",
+  "block.stone_x_iron_chests.stone_chest_prismarine": "Cofre de Piedra: Prismarina",
+  "block.stone_x_iron_chests.stone_chest_prismarine_bricks": "Cofre de Piedra: Ladrillos de Prismarina",
+  "block.stone_x_iron_chests.stone_chest_smooth_stone": "Cofre de Piedra: Piedra Lisa",
+  "block.stone_x_iron_chests.stone_chest_stone": "Cofre de Piedra: Piedra",
+  "block.stone_x_iron_chests.stone_chest_stone_bricks": "Cofre de Piedra: Ladrillos de Piedra",
+  "block.stone_x_iron_chests.stone_chest_tuff": "Cofre de Piedra: Tuff",
+  "container.stone_chest": "Cofre de Piedra"
+}

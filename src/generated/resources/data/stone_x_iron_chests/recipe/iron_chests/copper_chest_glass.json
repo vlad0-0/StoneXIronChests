@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "tag": "stone_x_iron_chests:stone_chest"
+    },
+    "G": {
+      "tag": "c:glass_blocks"
+    },
+    "M": {
+      "tag": "c:ingots/copper"
+    }
+  },
+  "pattern": [
+    "MGM",
+    "GCG",
+    "MGM"
+  ],
+  "result": {
+    "count": 1,
+    "id": "ironchest:copper_chest"
+  }
+}
