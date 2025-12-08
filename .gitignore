@@ -1,0 +1,6 @@
+.gradle/
+.idea/
+build/
+libs/
+run/
+src/generated/resources/.cache
