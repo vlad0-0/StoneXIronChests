@@ -4,14 +4,10 @@ package dev.invalid.stone_x_iron_chests;
 
 import dev.invalid.stone_x_iron_chests.chest.ModChestBlockEntity;
 import dev.invalid.stone_x_iron_chests.chest.NewStoneChestBlock;
-import dev.invalid.stone_x_iron_chests.client.ClientRenderData;
-import ftblag.stonechest.StoneChest;
 import ftblag.stonechest.blocks.EnumStoneChest;
 
 import java.util.*;
 
-import net.minecraft.client.renderer.Sheets;
-import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;

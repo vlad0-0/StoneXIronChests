@@ -3,8 +3,6 @@
 package dev.invalid.stone_x_iron_chests.chest;
 
 import dev.invalid.stone_x_iron_chests.ModRegistry;
-import ftblag.stonechest.blocks.EnumStoneChest;
-import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
