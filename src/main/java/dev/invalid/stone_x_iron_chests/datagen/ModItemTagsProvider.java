@@ -2,7 +2,6 @@
 
 package dev.invalid.stone_x_iron_chests.datagen;
 
-import dev.invalid.stone_x_iron_chests.StoneXIronChests;
 import ftblag.stonechest.blocks.EnumStoneChest;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;

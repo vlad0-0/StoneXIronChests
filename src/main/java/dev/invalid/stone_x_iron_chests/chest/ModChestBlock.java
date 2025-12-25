@@ -7,7 +7,6 @@ import dev.invalid.stone_x_iron_chests.ModRegistry;
 import dev.invalid.stone_x_iron_chests.StoneXIronChests;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.stats.Stat;
@@ -18,11 +17,8 @@ import net.minecraft.world.entity.animal.Cat;
 import net.minecraft.world.entity.monster.piglin.PiglinAi;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -32,7 +28,6 @@ import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.pathfinder.PathComputationType;
-import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -40,14 +35,13 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
 public class ModChestBlock extends ModAbstractSingleChestBlock<ModChestBlockEntity> implements SimpleWaterloggedBlock {
     public static final MapCodec<ModChestBlock> CODEC = simpleCodec((properties) ->
             new ModChestBlock(properties, () -> ModRegistry.STONE_CHEST_ENTITY.get()));
-    public static final DirectionProperty FACING;
+    public static final EnumProperty<Direction> FACING;
     public static final BooleanProperty WATERLOGGED;
     protected static final VoxelShape AABB;
 
@@ -63,12 +57,20 @@ public class ModChestBlock extends ModAbstractSingleChestBlock<ModChestBlockEnti
     }
 
     @Override
-    protected @NotNull BlockState updateShape(BlockState state, @NotNull Direction facing, @NotNull BlockState facingState,
-                                              @NotNull LevelAccessor level, @NotNull BlockPos currentPos, @NotNull BlockPos facingPos) {
-        if (state.getValue(WATERLOGGED)) {
-            level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+    protected @NotNull BlockState updateShape(BlockState blockState1,
+                                              @NotNull LevelReader level,
+                                              @NotNull ScheduledTickAccess tickAccess,
+                                              @NotNull BlockPos blockPos1,
+                                              @NotNull Direction direction,
+                                              @NotNull BlockPos blockPos2,
+                                              @NotNull BlockState blockState2,
+                                              @NotNull RandomSource randomSource) {
+        if (blockState1.getValue(WATERLOGGED)) {
+            tickAccess.scheduleTick(blockPos1, Fluids.WATER, Fluids.WATER.getTickDelay(level));
         }
-        return super.updateShape(state, facing, facingState, level, currentPos, facingPos);
+
+        return super.updateShape(blockState1, level, tickAccess, blockPos1,
+                direction, blockPos2, blockState2, randomSource);
     }
 
     @Override
@@ -116,7 +118,9 @@ public class ModChestBlock extends ModAbstractSingleChestBlock<ModChestBlockEnti
             if (menuprovider != null) {
                 player.openMenu(menuprovider);
                 player.awardStat(this.getOpenChestStat());
-                PiglinAi.angerNearbyPiglins(player, true);
+                if (level instanceof ServerLevel serverLevel) {
+                    PiglinAi.angerNearbyPiglins(serverLevel, player, true);
+                }
             }
             return InteractionResult.CONSUME;
         }
@@ -228,11 +232,6 @@ public class ModChestBlock extends ModAbstractSingleChestBlock<ModChestBlockEnti
     @Override
     protected @NotNull BlockState rotate(BlockState state, Rotation rotation) {
         return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
-    }
-
-    @Override
-    protected @NotNull BlockState mirror(@NotNull BlockState state, @NotNull Mirror mirror) {
-        return super.mirror(state, mirror);
     }
 
     @Override

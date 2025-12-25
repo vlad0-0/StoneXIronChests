@@ -3,46 +3,46 @@
 package dev.invalid.stone_x_iron_chests.datagen;
 
 import dev.invalid.stone_x_iron_chests.StoneXIronChests;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
-import net.minecraft.data.tags.TagsProvider;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 
+// Must specify Bus.MOD to receive GatherDataEvent
 @EventBusSubscriber(modid = StoneXIronChests.MODID)
 public class DataGenerators {
 
     @SubscribeEvent
-    public static void gatherData(GatherDataEvent event) {
-        DataGenerator generator = event.getGenerator();
-        PackOutput packOutput = generator.getPackOutput();
-        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
-        ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
+    public static void gatherData(GatherDataEvent.Client event) {
+        // Unified Registration: Register everything here to use runClientData for all tasks [1]
 
-        // Client data
-        generator.addProvider(event.includeClient(), new ModItemModelProvider(packOutput, existingFileHelper));
-        generator.addProvider(event.includeClient(), new ModBlockStateProvider(packOutput, existingFileHelper));
-        generator.addProvider(event.includeClient(), new ModLanguageProvider(packOutput, "en_us"));
+        // 1. Client Data
+        event.createProvider(ModModelProvider::new); // Automatically provides PackOutput
+        event.createProvider(output -> new ModLanguageProvider(output, "en_us"));
 
-        // Server data
-        generator.addProvider(event.includeServer(), new ModRecipeProvider(packOutput, lookupProvider));
-        generator.addProvider(event.includeServer(), new LootTableProvider(packOutput, Collections.emptySet(),
-                        List.of(new LootTableProvider.SubProviderEntry(ModBlockLootTableProvider::new, LootContextParamSets.BLOCK)), lookupProvider));
+        // 2. Server Data (Recipes via Runner pattern)
+        event.createProvider(ModRecipeProvider.Runner::new); // Standard runner helper
 
-        // Tags (server)
-        CompletableFuture<TagsProvider.TagLookup<Block>> blockTags = generator.addProvider(event.includeServer(),
-                new ModBlockTagsProvider(packOutput, lookupProvider, existingFileHelper)).contentsGetter();
-        generator.addProvider(event.includeServer(),
-                new ModItemTagsProvider(packOutput, lookupProvider, blockTags));
+        // 3. Loot Tables
+        event.createProvider(output -> new LootTableProvider(
+                output,
+                Collections.emptySet(),
+                List.of(new LootTableProvider.SubProviderEntry(
+                        ModBlockLootTableProvider::new,
+                        LootContextParamSets.BLOCK
+                )),
+                event.getLookupProvider() // Helper to get the registry future
+        ));
+
+        // 4. Tags (Using the specialized block and item tag helper)
+        var blockTags = event.createProvider(output ->
+                new ModBlockTagsProvider(output, event.getLookupProvider()));
+
+        event.createProvider(output ->
+                new ModItemTagsProvider(output, event.getLookupProvider(), blockTags.contentsGetter()));
     }
 }

@@ -2,28 +2,31 @@
 
 package dev.invalid.stone_x_iron_chests.chest;
 
+import dev.invalid.stone_x_iron_chests.ModRegistry;
+import dev.invalid.stone_x_iron_chests.client.ClientRenderData;
 import ftblag.stonechest.blocks.EnumStoneChest;
 import net.minecraft.core.Direction;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.entity.BlockEntityType;
-import java.util.function.Supplier;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 public class NewStoneChestBlock extends ModChestBlock {
-    private final EnumStoneChest chestType;
+    @OnlyIn(Dist.CLIENT)
+    public ClientRenderData clientRenderData;
 
-    public NewStoneChestBlock(EnumStoneChest chestType, Supplier<BlockEntityType<? extends ModChestBlockEntity>> blockEntityType) {
+    EnumStoneChest chestType;
+
+    public NewStoneChestBlock(EnumStoneChest chestType, ResourceKey<Block> key) {
         super(Properties.of()
                         .strength(3.5F, 5.0F)
                         .sound(SoundType.STONE)
+                        .setId(key)
                         .requiresCorrectToolForDrops(),
-                blockEntityType);
-        this.chestType = chestType;
+                () -> ModRegistry.STONE_CHEST_ENTITY.get());
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(FACING, Direction.NORTH)
                 .setValue(WATERLOGGED, false));
-    }
-
-    public EnumStoneChest getChestType() {
-        return this.chestType;
+        this.chestType = chestType;
     }
 }

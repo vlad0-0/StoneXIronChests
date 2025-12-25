@@ -15,7 +15,7 @@ public class ModLanguageProvider extends LanguageProvider {
     @Override
     protected void addTranslations() {
         String chestsTier = "Stone Tier Chest";
-        String chestsSharedKey = "block." + StoneXIronChests.MODID + "." + CHEST_PREFIX + "_";
+        String chestsSharedKey = "item." + StoneXIronChests.MODID + "." + CHEST_PREFIX + "_";
         String chestTranslatable;
         add("container.stone_chest", chestsTier);
         for (EnumStoneChest chestType : EnumStoneChest.VALUES) {

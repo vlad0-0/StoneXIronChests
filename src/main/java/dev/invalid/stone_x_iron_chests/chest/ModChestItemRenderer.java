@@ -3,65 +3,76 @@
 package dev.invalid.stone_x_iron_chests.chest;
 
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.math.Axis;
-import dev.invalid.stone_x_iron_chests.ModRegistry;
-import ftblag.stonechest.blocks.EnumStoneChest;
+import com.mojang.serialization.MapCodec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraft.client.model.geom.EntityModelSet;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.core.BlockPos;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.special.SpecialModelRenderer;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.HashMap;
-import java.util.Map;
+@OnlyIn(Dist.CLIENT)
+public class ModChestItemRenderer implements SpecialModelRenderer<NewStoneChestBlock> {
+    private final BlockEntityRenderDispatcher blockEntityRenderDispatcher;
 
-public class ModChestItemRenderer extends BlockEntityWithoutLevelRenderer {
-    public static final ModChestItemRenderer INSTANCE = new ModChestItemRenderer();
-    private final Map<EnumStoneChest, ModChestBlockEntity> tiles = new HashMap<>();
-
-    public ModChestItemRenderer() {
-        super(Minecraft.getInstance().getBlockEntityRenderDispatcher(), Minecraft.getInstance().getEntityModels());
+    public ModChestItemRenderer(BlockEntityRenderDispatcher dispatcher) {
+        this.blockEntityRenderDispatcher = dispatcher;
     }
 
-    private ModChestBlockEntity getOrCreateTile(EnumStoneChest type) {
-        return tiles.computeIfAbsent(type, k -> {
-            BlockState defaultState = ModRegistry.stoneChests[type.ordinal()].get()
-                    .defaultBlockState();
-            ModChestBlockEntity tile = new ModChestBlockEntity(BlockPos.ZERO, defaultState);
-            Level level = Minecraft.getInstance().level;
-            if (level != null) {
-                tile.setLevel(level);
-            }
-            return tile;
-        });
+    public record Unbaked(ResourceLocation texture) implements SpecialModelRenderer.Unbaked {
+        public static final MapCodec<Unbaked> MAP_CODEC = RecordCodecBuilder.mapCodec(
+                instance -> instance.group(
+                        ResourceLocation.CODEC.fieldOf("texture").forGetter(Unbaked::texture)
+                ).apply(instance, Unbaked::new)
+        );
+
+        @Override
+        public @NotNull SpecialModelRenderer<?> bake(@NotNull EntityModelSet entityModelSet) {
+            return new ModChestItemRenderer(Minecraft.getInstance().getBlockEntityRenderDispatcher());
+        }
+
+        @Override
+        public @NotNull MapCodec<? extends SpecialModelRenderer.Unbaked> type() {
+            return MAP_CODEC;
+        }
     }
 
     @Override
-    public void renderByItem(ItemStack itemStack, @NotNull ItemDisplayContext displayContext, @NotNull PoseStack poseStack,
-                             @NotNull MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
+    @Nullable
+    public NewStoneChestBlock extractArgument(ItemStack itemStack) {
         Block block = Block.byItem(itemStack.getItem());
         if (block instanceof NewStoneChestBlock stoneChestBlock) {
-            ModChestBlockEntity tile = getOrCreateTile(stoneChestBlock.getChestType());
+            return stoneChestBlock;
+        }
+        return null;
+    }
 
-            if (tile.getLevel() == null) {
-                Level level = Minecraft.getInstance().level;
-                if (level != null) {
-                    tile.setLevel(level);
-                }
-            }
+    @Override
+    public void render(@Nullable NewStoneChestBlock stoneChestBlock, @NotNull ItemDisplayContext displayContext,
+                       @NotNull PoseStack poseStack, @NotNull MultiBufferSource buffer,
+                       int combinedLight, int combinedOverlay, boolean hasFoil) {
+        if (stoneChestBlock == null) return;
 
+        ModChestBlockEntity tile = stoneChestBlock.clientRenderData.getOrCreateTile();
+
+        stoneChestBlock.clientRenderData.updateLevel();
+
+        if (tile.getLevel() == null) return;
+
+        BlockEntityRenderer<ModChestBlockEntity> renderer = this.blockEntityRenderDispatcher.getRenderer(tile);
+
+        if (renderer != null) {
             poseStack.pushPose();
-            poseStack.translate(0.5, 0.5, 0.5);
-            poseStack.mulPose(Axis.YP.rotationDegrees(180));
-            poseStack.translate(-0.5, -0.5, -0.5);
-
-            Minecraft.getInstance().getBlockEntityRenderDispatcher()
-                    .renderItem(tile, poseStack, buffer, combinedLight, combinedOverlay);
+            renderer.render(tile, 0.0f, poseStack, buffer, combinedLight, combinedOverlay);
             poseStack.popPose();
         }
     }
