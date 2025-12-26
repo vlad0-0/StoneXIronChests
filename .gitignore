@@ -3,4 +3,4 @@
 build/
 libs/
 run/
-src/generated/resources/.cache
+src/generated
