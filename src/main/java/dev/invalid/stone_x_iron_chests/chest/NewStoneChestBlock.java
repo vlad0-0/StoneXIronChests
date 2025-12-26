@@ -2,13 +2,20 @@
 
 package dev.invalid.stone_x_iron_chests.chest;
 
+import dev.invalid.stone_x_iron_chests.client.ClientRenderData;
 import ftblag.stonechest.blocks.EnumStoneChest;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+
 import java.util.function.Supplier;
 
 public class NewStoneChestBlock extends ModChestBlock {
+    @OnlyIn(Dist.CLIENT)
+    public ClientRenderData clientRenderData;
+
     private final EnumStoneChest chestType;
 
     public NewStoneChestBlock(EnumStoneChest chestType, Supplier<BlockEntityType<? extends ModChestBlockEntity>> blockEntityType) {

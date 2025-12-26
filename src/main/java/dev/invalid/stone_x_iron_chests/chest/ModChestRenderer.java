@@ -36,23 +36,12 @@ public class ModChestRenderer<T extends ModChestBlockEntity> implements BlockEnt
     private final ModelPart lid;
     private final ModelPart bottom;
     private final ModelPart lock;
-    private final Map<EnumStoneChest, Material> materials;
 
     public ModChestRenderer(BlockEntityRendererProvider.Context context) {
         ModelPart modelpart = context.bakeLayer(ModelLayers.CHEST);
         this.lid = modelpart.getChild("lid");
         this.bottom = modelpart.getChild("bottom");
         this.lock = modelpart.getChild("lock");
-        this.materials = new HashMap<>();
-
-        for (EnumStoneChest chestType : EnumStoneChest.VALUES) {
-            String basePath = "entity/chest/" + chestType.name().toLowerCase(Locale.ENGLISH);
-            Material material = new Material(
-                    Sheets.CHEST_SHEET,
-                    ResourceLocation.fromNamespaceAndPath(StoneChest.MODID, basePath)
-            );
-            materials.put(chestType, material);
-        }
     }
 
     @Override
@@ -70,13 +59,7 @@ public class ModChestRenderer<T extends ModChestBlockEntity> implements BlockEnt
         }
 
         Direction direction = blockState.getValue(ModChestBlock.FACING);
-        EnumStoneChest chestType = stoneChest.getChestType();
-
-        Material material = materials.get(chestType);
-        if (material == null) {
-            StoneXIronChests.LOGGER.error("No material for chest type: {}", chestType);
-            return;
-        }
+        Material material = stoneChest.clientRenderData.getMaterial();
 
         poseStack.pushPose();
         float rotation = direction.toYRot();

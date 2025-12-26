@@ -124,6 +124,11 @@ public class ModRecipeProvider extends RecipeProvider {
                 .requires(IronChestsBlocks.DIRT_CHEST)
                 .unlockedBy("has_ingredient", has(IronChestsBlocks.DIRT_CHEST))
                 .save(output, location("iron_chests/dirt_chest_disassembly"));
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, Items.DIRT, 8)
+                .requires(IronChestsBlocks.TRAPPED_DIRT_CHEST)
+                .unlockedBy("has_ingredient", has(IronChestsBlocks.TRAPPED_DIRT_CHEST))
+                .save(output, location("iron_chests/trapped_dirt_chest_disassembly"));
     }
 
     private String getMaterialName(String chestTypeString) {

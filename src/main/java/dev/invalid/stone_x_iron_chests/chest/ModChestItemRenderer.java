@@ -22,23 +22,9 @@ import java.util.Map;
 
 public class ModChestItemRenderer extends BlockEntityWithoutLevelRenderer {
     public static final ModChestItemRenderer INSTANCE = new ModChestItemRenderer();
-    private final Map<EnumStoneChest, ModChestBlockEntity> tiles = new HashMap<>();
 
     public ModChestItemRenderer() {
         super(Minecraft.getInstance().getBlockEntityRenderDispatcher(), Minecraft.getInstance().getEntityModels());
-    }
-
-    private ModChestBlockEntity getOrCreateTile(EnumStoneChest type) {
-        return tiles.computeIfAbsent(type, k -> {
-            BlockState defaultState = ModRegistry.stoneChests[type.ordinal()].get()
-                    .defaultBlockState();
-            ModChestBlockEntity tile = new ModChestBlockEntity(BlockPos.ZERO, defaultState);
-            Level level = Minecraft.getInstance().level;
-            if (level != null) {
-                tile.setLevel(level);
-            }
-            return tile;
-        });
     }
 
     @Override
@@ -46,22 +32,14 @@ public class ModChestItemRenderer extends BlockEntityWithoutLevelRenderer {
                              @NotNull MultiBufferSource buffer, int combinedLight, int combinedOverlay) {
         Block block = Block.byItem(itemStack.getItem());
         if (block instanceof NewStoneChestBlock stoneChestBlock) {
-            ModChestBlockEntity tile = getOrCreateTile(stoneChestBlock.getChestType());
-
-            if (tile.getLevel() == null) {
-                Level level = Minecraft.getInstance().level;
-                if (level != null) {
-                    tile.setLevel(level);
-                }
-            }
 
             poseStack.pushPose();
             poseStack.translate(0.5, 0.5, 0.5);
-            poseStack.mulPose(Axis.YP.rotationDegrees(180));
             poseStack.translate(-0.5, -0.5, -0.5);
 
             Minecraft.getInstance().getBlockEntityRenderDispatcher()
-                    .renderItem(tile, poseStack, buffer, combinedLight, combinedOverlay);
+                    .renderItem(stoneChestBlock.clientRenderData.getOrCreateTile(),
+                            poseStack, buffer, combinedLight, combinedOverlay);
             poseStack.popPose();
         }
     }
