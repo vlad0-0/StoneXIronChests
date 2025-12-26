@@ -1,0 +1,21 @@
+{
+  "item.stone_x_iron_chests.stone_chest_andesite": "Steintruhe: Andesit",
+  "item.stone_x_iron_chests.stone_chest_calcite": "Steintruhe: Kalzit",
+  "item.stone_x_iron_chests.stone_chest_cobbled_deepslate": "Steintruhe: Kopfsteinpflaster aus Deepslate",
+  "item.stone_x_iron_chests.stone_chest_cobblestone": "Steintruhe: Kopfsteinpflaster",
+  "item.stone_x_iron_chests.stone_chest_dark_prismarine": "Steintruhe: Dunkles Prismarin",
+  "item.stone_x_iron_chests.stone_chest_deepslate": "Steintruhe: Deepslate",
+  "item.stone_x_iron_chests.stone_chest_deepslate_bricks": "Steintruhe: Deepslate-Ziegelsteine",
+  "item.stone_x_iron_chests.stone_chest_diorite": "Steintruhe: Diorit",
+  "item.stone_x_iron_chests.stone_chest_dripstone": "Steintruhe: Tropfstein",
+  "item.stone_x_iron_chests.stone_chest_granite": "Steintruhe: Granit",
+  "item.stone_x_iron_chests.stone_chest_mossy_cobblestone": "Steintruhe: Moosbewachsener Kopfsteinpflaster",
+  "item.stone_x_iron_chests.stone_chest_mossy_stone_bricks": "Steintruhe: Moosbewachsene Steinziegel",
+  "item.stone_x_iron_chests.stone_chest_prismarine": "Steintruhe: Prismarin",
+  "item.stone_x_iron_chests.stone_chest_prismarine_bricks": "Steintruhe: Prismarinziegel",
+  "item.stone_x_iron_chests.stone_chest_smooth_stone": "Steintruhe: Glatter Stein",
+  "item.stone_x_iron_chests.stone_chest_stone": "Steintruhe: Stein",
+  "item.stone_x_iron_chests.stone_chest_stone_bricks": "Steintruhe: Steinziegel",
+  "item.stone_x_iron_chests.stone_chest_tuff": "Steintruhe: Tuffstein",
+  "container.stone_chest": "Steintruhe"
+}
