@@ -5,7 +5,11 @@
       "required": false
     },
     {
-      "id": "stone_x_iron_chests:stone_chest_calcite",
+      "id": "stone_x_iron_chests:stone_chest_polished_andesite",
+      "required": false
+    },
+    {
+      "id": "stone_x_iron_chests:stone_chest_chiseled_deepslate",
       "required": false
     },
     {
@@ -13,11 +17,11 @@
       "required": false
     },
     {
-      "id": "stone_x_iron_chests:stone_chest_cobblestone",
+      "id": "stone_x_iron_chests:stone_chest_cracked_deepslate_bricks",
       "required": false
     },
     {
-      "id": "stone_x_iron_chests:stone_chest_dark_prismarine",
+      "id": "stone_x_iron_chests:stone_chest_cracked_deepslate_tiles",
       "required": false
     },
     {
@@ -29,7 +33,47 @@
       "required": false
     },
     {
+      "id": "stone_x_iron_chests:stone_chest_deepslate_tiles",
+      "required": false
+    },
+    {
+      "id": "stone_x_iron_chests:stone_chest_polished_deepslate",
+      "required": false
+    },
+    {
+      "id": "stone_x_iron_chests:stone_chest_cobblestone",
+      "required": false
+    },
+    {
+      "id": "stone_x_iron_chests:stone_chest_mossy_cobblestone",
+      "required": false
+    },
+    {
+      "id": "stone_x_iron_chests:stone_chest_chiseled_stone_bricks",
+      "required": false
+    },
+    {
+      "id": "stone_x_iron_chests:stone_chest_cracked_stone_bricks",
+      "required": false
+    },
+    {
+      "id": "stone_x_iron_chests:stone_chest_mossy_stone_bricks",
+      "required": false
+    },
+    {
+      "id": "stone_x_iron_chests:stone_chest_stone_bricks",
+      "required": false
+    },
+    {
+      "id": "stone_x_iron_chests:stone_chest_calcite",
+      "required": false
+    },
+    {
       "id": "stone_x_iron_chests:stone_chest_diorite",
+      "required": false
+    },
+    {
+      "id": "stone_x_iron_chests:stone_chest_polished_diorite",
       "required": false
     },
     {
@@ -41,11 +85,7 @@
       "required": false
     },
     {
-      "id": "stone_x_iron_chests:stone_chest_mossy_cobblestone",
-      "required": false
-    },
-    {
-      "id": "stone_x_iron_chests:stone_chest_mossy_stone_bricks",
+      "id": "stone_x_iron_chests:stone_chest_polished_granite",
       "required": false
     },
     {
@@ -57,19 +97,59 @@
       "required": false
     },
     {
-      "id": "stone_x_iron_chests:stone_chest_smooth_stone",
-      "required": false
-    },
-    {
-      "id": "stone_x_iron_chests:stone_chest_stone",
-      "required": false
-    },
-    {
-      "id": "stone_x_iron_chests:stone_chest_stone_bricks",
+      "id": "stone_x_iron_chests:stone_chest_dark_prismarine",
       "required": false
     },
     {
       "id": "stone_x_iron_chests:stone_chest_tuff",
+      "required": false
+    },
+    {
+      "id": "stone_x_iron_chests:stone_chest_tuff_bricks",
+      "required": false
+    },
+    {
+      "id": "stone_x_iron_chests:stone_chest_polished_tuff",
+      "required": false
+    },
+    {
+      "id": "stone_x_iron_chests:stone_chest_chiseled_tuff",
+      "required": false
+    },
+    {
+      "id": "stone_x_iron_chests:stone_chest_chiseled_tuff_bricks",
+      "required": false
+    },
+    {
+      "id": "stone_x_iron_chests:stone_chest_basalt",
+      "required": false
+    },
+    {
+      "id": "stone_x_iron_chests:stone_chest_smooth_basalt",
+      "required": false
+    },
+    {
+      "id": "stone_x_iron_chests:stone_chest_polished_basalt",
+      "required": false
+    },
+    {
+      "id": "stone_x_iron_chests:stone_chest_blackstone",
+      "required": false
+    },
+    {
+      "id": "stone_x_iron_chests:stone_chest_polished_blackstone",
+      "required": false
+    },
+    {
+      "id": "stone_x_iron_chests:stone_chest_polished_blackstone_bricks",
+      "required": false
+    },
+    {
+      "id": "stone_x_iron_chests:stone_chest_cracked_polished_blackstone_bricks",
+      "required": false
+    },
+    {
+      "id": "stone_x_iron_chests:stone_chest_chiseled_polished_blackstone",
       "required": false
     }
   ]
