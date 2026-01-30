@@ -73,7 +73,7 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 dependencies {
     implementation('com.progwml6.ironchest:ironchest:1.21.4-neoforge-16.2.2')
-    implementation('local.mods:stonechest-1.21.4-1.0.0:local')
+    implementation('local.mods:stonechest-neoforge-1.21.4-1.2.0:local')
 }
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
