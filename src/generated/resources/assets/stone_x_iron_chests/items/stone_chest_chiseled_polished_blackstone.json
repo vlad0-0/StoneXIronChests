@@ -1,0 +1,10 @@
+{
+  "model": {
+    "type": "minecraft:special",
+    "base": "stone_x_iron_chests:item/stone_chest_chiseled_polished_blackstone",
+    "model": {
+      "type": "stone_x_iron_chests:stone_chest_renderer",
+      "texture": "stonechest:chest_chiseled_polished_blackstone"
+    }
+  }
+}

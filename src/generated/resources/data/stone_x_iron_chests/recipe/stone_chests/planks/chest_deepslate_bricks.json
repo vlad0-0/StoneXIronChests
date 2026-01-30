@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": "#c:chests/wooden",
+    "M": "minecraft:deepslate_bricks",
+    "P": "#minecraft:planks"
+  },
+  "pattern": [
+    "MPM",
+    "PCP",
+    "MPM"
+  ],
+  "result": {
+    "count": 1,
+    "id": "stone_x_iron_chests:stone_chest_deepslate_bricks"
+  }
+}
