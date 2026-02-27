@@ -49,6 +49,14 @@
       "required": false
     },
     {
+      "id": "stone_x_iron_chests:stone_chest_stone",
+      "required": false
+    },
+    {
+      "id": "stone_x_iron_chests:stone_chest_smooth_stone",
+      "required": false
+    },
+    {
       "id": "stone_x_iron_chests:stone_chest_chiseled_stone_bricks",
       "required": false
     },
