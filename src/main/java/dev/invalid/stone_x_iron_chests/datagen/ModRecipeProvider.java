@@ -73,7 +73,7 @@ public class ModRecipeProvider extends RecipeProvider {
                     RecipeCategory.BUILDING_BLOCKS,
                     chestItem,
                     material,
-                    8);
+                    4);
 
             if (material == Items.COBBLESTONE ||
                     material == Items.COBBLED_DEEPSLATE ||
