@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "stone_x_iron_chests:stone_chest_polished_blackstone"
+  },
+  "result": {
+    "count": 8,
+    "id": "minecraft:polished_blackstone"
+  }
+}

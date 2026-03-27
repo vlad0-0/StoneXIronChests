@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "stone_x_iron_chests:stone_chest_smooth_stone"
+  },
+  "result": {
+    "count": 8,
+    "id": "minecraft:smooth_stone"
+  }
+}

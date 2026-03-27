@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "tag": "c:chests/wooden"
+    },
+    "G": {
+      "tag": "c:glass_blocks"
+    },
+    "M": {
+      "item": "minecraft:polished_tuff"
+    }
+  },
+  "pattern": [
+    "MGM",
+    "GCG",
+    "MGM"
+  ],
+  "result": {
+    "count": 1,
+    "id": "stone_x_iron_chests:stone_chest_polished_tuff"
+  }
+}

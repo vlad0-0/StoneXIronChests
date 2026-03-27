@@ -48,14 +48,6 @@ public class ModRecipeProvider extends RecipeProvider {
                     .save(output, location("stone_chests/conversion/chest_" + chestTypeString));
 
             ShapedRecipeBuilder.shaped(RecipeCategory.MISC, chestItem)
-                    .pattern("###")
-                    .pattern("# #")
-                    .pattern("###")
-                    .define('#', Ingredient.of(material))
-                    .unlockedBy("has_ingredient", has(material))
-                    .save(output, location("stone_chests/fast/chest_" + chestTypeString));
-
-            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, chestItem)
                     .pattern("MPM")
                     .pattern("PCP")
                     .pattern("MPM")
@@ -74,8 +66,25 @@ public class ModRecipeProvider extends RecipeProvider {
                     .define('C', Ingredient.of(Tags.Items.CHESTS_WOODEN))
                     .unlockedBy("has_ingredient", has(material))
                     .save(output, location("stone_chests/glass/chest_" + chestTypeString));
-        }
 
+            StonecuttingRecipe(output,
+                    RecipeCategory.BUILDING_BLOCKS,
+                    chestItem,
+                    material,
+                    8);
+
+            if (material == Items.COBBLESTONE ||
+                    material == Items.COBBLED_DEEPSLATE ||
+                    material == Items.BLACKSTONE) { continue; }
+
+            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, chestItem)
+                    .pattern("###")
+                    .pattern("# #")
+                    .pattern("###")
+                    .define('#', Ingredient.of(material))
+                    .unlockedBy("has_ingredient", has(material))
+                    .save(output, location("stone_chests/fast/chest_" + chestTypeString));
+        }
 
         //new copper chest recipes
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, IronChestsBlocks.COPPER_CHEST)
@@ -129,6 +138,18 @@ public class ModRecipeProvider extends RecipeProvider {
                 .requires(IronChestsBlocks.TRAPPED_DIRT_CHEST)
                 .unlockedBy("has_ingredient", has(IronChestsBlocks.TRAPPED_DIRT_CHEST))
                 .save(output, location("iron_chests/trapped_dirt_chest_disassembly"));
+    }
+
+    protected void StonecuttingRecipe(RecipeOutput output, RecipeCategory category,
+                                      ItemLike ingredient, ItemLike result, int count) {
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ingredient), category, result, count)
+                .unlockedBy(getHasName(ingredient), has(ingredient))
+                .save(output, getConversionItemToItemRecipeName(ingredient, result) + "_stonecutting");
+    }
+
+    protected String getConversionItemToItemRecipeName(ItemLike ingredient, ItemLike result) {
+        String recipeName = getItemName(ingredient);
+        return recipeName + "_to_" + getItemName(result);
     }
 
     private String getMaterialName(String chestTypeString) {

@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "#": {
-      "item": "minecraft:cobbled_deepslate"
+      "item": "minecraft:stone"
     }
   },
   "pattern": [
@@ -13,6 +13,6 @@
   ],
   "result": {
     "count": 1,
-    "id": "stone_x_iron_chests:stone_chest_cobbled_deepslate"
+    "id": "stone_x_iron_chests:stone_chest_stone"
   }
 }

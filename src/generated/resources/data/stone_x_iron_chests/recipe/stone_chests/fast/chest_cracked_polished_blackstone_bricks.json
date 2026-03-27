@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "#": {
-      "item": "minecraft:cobblestone"
+      "item": "minecraft:cracked_polished_blackstone_bricks"
     }
   },
   "pattern": [
@@ -13,6 +13,6 @@
   ],
   "result": {
     "count": 1,
-    "id": "stone_x_iron_chests:stone_chest_cobblestone"
+    "id": "stone_x_iron_chests:stone_chest_cracked_polished_blackstone_bricks"
   }
 }

@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": {
+    "item": "stone_x_iron_chests:stone_chest_cracked_stone_bricks"
+  },
+  "result": {
+    "count": 8,
+    "id": "minecraft:cracked_stone_bricks"
+  }
+}

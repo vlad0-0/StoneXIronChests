@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "stonechest:chest_cracked_polished_blackstone_bricks"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "stone_x_iron_chests:stone_chest_cracked_polished_blackstone_bricks"
+  }
+}
