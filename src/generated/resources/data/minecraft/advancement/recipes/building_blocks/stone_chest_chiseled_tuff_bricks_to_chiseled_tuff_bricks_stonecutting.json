@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_stone_chest_chiseled_tuff_bricks": {
+      "conditions": {
+        "items": [
+          {
+            "items": "stone_x_iron_chests:stone_chest_chiseled_tuff_bricks"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "minecraft:stone_chest_chiseled_tuff_bricks_to_chiseled_tuff_bricks_stonecutting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_stone_chest_chiseled_tuff_bricks"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "minecraft:stone_chest_chiseled_tuff_bricks_to_chiseled_tuff_bricks_stonecutting"
+    ]
+  }
+}

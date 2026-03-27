@@ -16,6 +16,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.Tags;
@@ -49,14 +50,6 @@ public class ModRecipeProvider extends RecipeProvider {
                     .save(output, recipeKey("stone_chests/conversion/chest_" + chestTypeString));
 
             ShapedRecipeBuilder.shaped(itemGetter, RecipeCategory.MISC, chestItem)
-                    .pattern("###")
-                    .pattern("# #")
-                    .pattern("###")
-                    .define('#', material)
-                    .unlockedBy("has_ingredient", has(material))
-                    .save(output, recipeKey("stone_chests/fast/chest_" + chestTypeString));
-
-            ShapedRecipeBuilder.shaped(itemGetter, RecipeCategory.MISC, chestItem)
                     .pattern("MPM")
                     .pattern("PCP")
                     .pattern("MPM")
@@ -75,6 +68,24 @@ public class ModRecipeProvider extends RecipeProvider {
                     .define('C', Tags.Items.CHESTS_WOODEN)
                     .unlockedBy("has_ingredient", has(material))
                     .save(output, recipeKey("stone_chests/glass/chest_" + chestTypeString));
+
+            StonecuttingRecipe(output,
+                    RecipeCategory.BUILDING_BLOCKS,
+                    chestItem,
+                    material,
+                    8);
+
+            if (material == Items.COBBLESTONE ||
+                    material == Items.COBBLED_DEEPSLATE ||
+                    material == Items.BLACKSTONE) { continue; }
+
+            ShapedRecipeBuilder.shaped(itemGetter, RecipeCategory.MISC, chestItem)
+                    .pattern("###")
+                    .pattern("# #")
+                    .pattern("###")
+                    .define('#', material)
+                    .unlockedBy("has_ingredient", has(material))
+                    .save(output, recipeKey("stone_chests/fast/chest_" + chestTypeString));
         }
 
         //new copper chest recipes
@@ -145,6 +156,18 @@ public class ModRecipeProvider extends RecipeProvider {
         public @NotNull String getName() {
             return "Stone X Iron Chests Recipes";
         }
+    }
+
+    protected void StonecuttingRecipe(RecipeOutput output, RecipeCategory category,
+                                      ItemLike ingredient, ItemLike result, int count) {
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(ingredient), category, result, count)
+                .unlockedBy(getHasName(ingredient), has(ingredient))
+                .save(output, getConversionItemToItemRecipeName(ingredient, result) + "_stonecutting");
+    }
+
+    protected String getConversionItemToItemRecipeName(ItemLike ingredient, ItemLike result) {
+        String recipeName = getItemName(ingredient);
+        return recipeName + "_to_" + getItemName(result);
     }
 
     private String getMaterialName(String chestTypeString) {

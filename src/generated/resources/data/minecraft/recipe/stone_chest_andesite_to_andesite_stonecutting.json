@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "stone_x_iron_chests:stone_chest_andesite",
+  "result": {
+    "count": 8,
+    "id": "minecraft:andesite"
+  }
+}

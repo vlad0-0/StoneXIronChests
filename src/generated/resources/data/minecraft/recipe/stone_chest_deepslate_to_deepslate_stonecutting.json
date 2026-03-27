@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:stonecutting",
+  "ingredient": "stone_x_iron_chests:stone_chest_deepslate",
+  "result": {
+    "count": 8,
+    "id": "minecraft:deepslate"
+  }
+}
